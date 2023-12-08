@@ -5,14 +5,13 @@ print("______________________________________________")
 print(" ")
 
 
-archivo = open("pass-phrase/palabras.txt", "r")
+archivo = open("./admin/palabras.txt", "r")
 
 
 linea = archivo.readline()
 
 lista = ""
 bandera = 0
-contador = 0
 
 print("Leyendo...")
 
@@ -23,13 +22,14 @@ while linea != "":
         lista += "    "
         bandera = 1
 
-    linea = linea.replace("	" , "\" : \"")
+    
     if "\n" in linea:
         linea = linea.replace("\n" , "\",")
     else:
         linea = linea + "\""
 
-    lista += "\"" + linea
+    linea = linea.strip().split("	")
+    lista += "\"" + linea[1]
 
     linea = archivo.readline()
 
@@ -38,11 +38,11 @@ archivo.close()
 print(" ")
 print("Escribiendo...")
 
-archivo = open("pass-phrase\lista_palabras.py", "w")
+archivo = open("./user/lista_palabras.py", "w")
 
-archivo.write("palabras = {\n")
+archivo.write("palabras = [\n")
 archivo.write(lista + "\n")
-archivo.write("}")
+archivo.write("]")
 archivo.close()
 
 print(" ")

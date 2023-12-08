@@ -1,5 +1,5 @@
-import random
 from lista_palabras import palabras
+import secrets
 
 print("-----------------------------")
 print(" Pass maker")
@@ -9,7 +9,7 @@ print(" ")
 bandera = 0
 while bandera == 0:
     try:
-        repeticiones = int(input("Ingrese la cantidad de palabras que quiere generar: "))
+        cantidad = int(input("Ingrese la cantidad de palabras que quiere generar: "))
         bandera = 1
     except:
         print("- Recuerde que debe ser un número -")
@@ -25,27 +25,24 @@ while bandera == 0:
 pass_phrase = ""
 
 if numeros == "s":
-    for repeticion in range(1, (repeticiones + 1)):
-        combinacion = ""
-        for numero in range(1, 6):
-            valor = random.randint(1, 6)
-            combinacion += str(valor)
-
-        if repeticion < repeticiones:
-            pass_phrase += palabras[combinacion] + str(random.randint(0,99)) + "-"
+    for repeticion in range(1, (cantidad + 1)):
+        if repeticion < cantidad:
+            if(1 == secrets.randbelow(2)):
+                pass_phrase += palabras[secrets.randbelow(7775)] + str(secrets.randbelow(999)) + "-"
+            else:
+                pass_phrase +=  str(secrets.randbelow(999)) + palabras[secrets.randbelow(7775)] + "-"
         else:
-            pass_phrase += palabras[combinacion] + str(random.randint(0,99))
+            if(2 == secrets.randbelow(2)):
+                pass_phrase += palabras[secrets.randbelow(7775)]
+            else:
+                pass_phrase += palabras[secrets.randbelow(7775)] + str(secrets.randbelow(999))
 else:
-    for repeticion in range(1, (repeticiones + 1)):
-        combinacion = ""
-        for numero in range(1, 6):
-            valor = random.randint(1, 6)
-            combinacion += str(valor)
+    for repeticion in range(1, (cantidad + 1)):
 
-        if repeticion < repeticiones:
-            pass_phrase += palabras[combinacion] + "-"
+        if repeticion < cantidad:
+            pass_phrase += palabras[secrets.randbelow(7775)] + "-"
         else:
-            pass_phrase += palabras[combinacion]
+            pass_phrase += palabras[secrets.randbelow(7775)]
 
 print(" ")
 print(f"La pass-phrase es: {pass_phrase}")
